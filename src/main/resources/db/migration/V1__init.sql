@@ -1,11 +1,9 @@
--- Створення таблиці команд
 CREATE TABLE team (
                       id SERIAL PRIMARY KEY,
                       name VARCHAR(50) NOT NULL,
                       city VARCHAR(50) NOT NULL
 );
 
--- Створення таблиці результатів матчів
 CREATE TABLE match_result (
                               id SERIAL PRIMARY KEY,
 
