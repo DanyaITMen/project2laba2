@@ -7,7 +7,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @RestController
 @RequestMapping("/api")
 public class SignUpRestController {
@@ -24,12 +23,12 @@ public class SignUpRestController {
         try {
             System.out.println("=== ПОЧАТОК РЕЄСТРАЦІЇ ===");
             System.out.println("Отримані дані:");
-            System.out.println("Username: " + request.getUsername());
-            System.out.println("Password: " + request.getPassword());
-            System.out.println("Role: " + request.getRole());
+            System.out.println("Username: " + request.username());
+            System.out.println("Password: " + request.password());
+            System.out.println("Role: " + request.role());
 
             // Перевірка чи користувач вже існує
-            boolean userExists = userRepository.existsByUsername(request.getUsername());
+            boolean userExists = userRepository.existsByUsername(request.username());
             System.out.println("Користувач існує: " + userExists);
 
             if (userExists) {
@@ -40,13 +39,13 @@ public class SignUpRestController {
 
             // Створення нового користувача
             User user = new User();
-            user.setUsername(request.getUsername());
+            user.setUsername(request.username());
 
-            String encodedPassword = encoder.encode(request.getPassword());
+            String encodedPassword = encoder.encode(request.password());
             System.out.println("Закодований пароль: " + encodedPassword);
             user.setPassword(encodedPassword);
 
-            user.setRole(request.getRole());
+            user.setRole(request.role());
 
             System.out.println("Створений об'єкт User: " + user);
 
@@ -55,7 +54,6 @@ public class SignUpRestController {
             System.out.println("Збережений користувач: " + savedUser);
             System.out.println("ID збереженого користувача: " + savedUser.getId());
 
-            // Перевірка чи користувач справді збережений
             long totalUsers = userRepository.count();
             System.out.println("Загальна кількість користувачів в БД: " + totalUsers);
 
