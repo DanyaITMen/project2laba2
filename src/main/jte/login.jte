@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Реєстрація - Футбольний портал</title>
+    <title>Авторизація - Футбольний портал</title>
     <style>
         * {
             margin: 0;
@@ -48,7 +48,7 @@
             100% { opacity: 0.7; }
         }
 
-        .register-container {
+        .login-container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 25px;
@@ -73,7 +73,7 @@
             }
         }
 
-        .register-container::before {
+        .login-container::before {
             content: '';
             position: absolute;
             top: 0;
@@ -138,8 +138,7 @@
             font-size: 1rem;
         }
 
-        .input-group input,
-        .input-group select {
+        .input-group input {
             width: 100%;
             padding: 20px;
             border: 2px solid #ecf0f1;
@@ -150,15 +149,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .input-group select {
-            appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%237f8c8d" d="M7 10l5 5 5-5z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 20px center;
-        }
-
-        .input-group input:focus,
-        .input-group select:focus {
+        .input-group input:focus {
             outline: none;
             border-color: #3498db;
             box-shadow: 0 5px 25px rgba(52, 152, 219, 0.3);
@@ -166,9 +157,7 @@
         }
 
         .input-group input:focus + label,
-        .input-group input:valid + label,
-        .input-group select:focus + label,
-        .input-group select:valid + label {
+        .input-group input:valid + label {
             top: -10px;
             left: 15px;
             font-size: 0.8rem;
@@ -176,46 +165,6 @@
             background: #fff;
             padding: 0 5px;
             font-weight: bold;
-        }
-
-        .register-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .register-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .register-btn:hover::before {
-            left: 100%;
-        }
-
-        .register-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(46, 204, 113, 0.4);
-        }
-
-        .register-btn:active {
-            transform: translateY(-1px);
         }
 
         .login-btn {
@@ -232,10 +181,7 @@
             box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
             position: relative;
             overflow: hidden;
-            margin-top: 20px;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
+            margin-bottom: 20px;
         }
 
         .login-btn::before {
@@ -262,6 +208,45 @@
             transform: translateY(-1px);
         }
 
+        .signup-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signup-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .signup-btn:hover::before {
+            left: 100%;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(46, 204, 113, 0.4);
+        }
+
         .message {
             margin-top: 20px;
             padding: 15px;
@@ -277,15 +262,46 @@
             box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
         }
 
-        .success-message {
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        .logout-message {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
             color: white;
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: #bdc3c7;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #ecf0f1;
+        }
+
+        .divider span {
+            padding: 0 20px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 20px;
+                padding: 30px 25px;
+            }
+
+            .header h2 {
+                font-size: 2rem;
+            }
         }
 
         .floating-elements {
@@ -328,17 +344,6 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
-
-        @media (max-width: 480px) {
-            .register-container {
-                margin: 20px;
-                padding: 30px 25px;
-            }
-
-            .header h2 {
-                font-size: 2rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -348,9 +353,9 @@
     <div class="floating-ball"></div>
 </div>
 
-<div class="register-container">
+<div class="login-container">
     <div class="header">
-        <h2>⚽ Реєстрація користувача</h2>
+        <h2>⚽ Вхід в систему</h2>
         <div class="subtitle">
             <span class="football-icon">🏆</span>
             Футбольний портал
@@ -358,54 +363,48 @@
         </div>
     </div>
 
-    <div id="messageContainer">
-        <script>
-            const urlParams = new URLSearchParams(window.location.search);
-            const error = urlParams.get('error');
-            const success = urlParams.get('success');
-
-            if (error) {
-                document.getElementById('messageContainer').innerHTML =
-                    '<div class="message error-message">❌ ' + decodeURIComponent(error) + '</div>';
-            }
-            if (success) {
-                document.getElementById('messageContainer').innerHTML =
-                    '<div class="message success-message">✅ ' + decodeURIComponent(success) + '</div>';
-            }
-        </script>
-    </div>
-
-    <form method="post" action="/api/signup">
+    <form method="post" action="/login">
         <div class="input-group">
-            <input type="text" name="username" required minlength="3" maxlength="50">
+            <input type="text" name="username" required>
             <label>Ім'я користувача</label>
         </div>
 
         <div class="input-group">
-            <input type="password" name="password" required minlength="6">
+            <input type="password" name="password" required>
             <label>Пароль</label>
         </div>
 
-        <div class="input-group">
-            <select name="role" required>
-                <option value="" disabled selected hidden></option>
-                <option value="USER">Користувач</option>
-                <option value="ADMIN">Адміністратор</option>
-            </select>
-            <label>Роль</label>
-        </div>
-
-        <button type="submit" class="register-btn">
-            ⭐ Зареєструватися
+        <button type="submit" class="login-btn">
+            🚀 Увійти в систему
         </button>
     </form>
 
-    <a href="/login" class="login-btn">🚪 Увійти</a>
+    <div class="divider">
+        <span>або</span>
+    </div>
+
+    <a href="/signup" class="signup-btn">
+        ⭐ Зареєструватися
+    </a>
+
+    <div id="messageContainer">
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('error')) {
+                document.getElementById('messageContainer').innerHTML =
+                    '<div class="message error-message">❌ Невірний логін або пароль!</div>';
+            }
+            if (params.has('logout')) {
+                document.getElementById('messageContainer').innerHTML =
+                    '<div class="message logout-message">👋 Ви вийшли з системи.</div>';
+            }
+        </script>
+    </div>
 </div>
 
 <script>
     // Добавляем интерактивности
-    document.querySelectorAll('input, select').forEach(input => {
+    document.querySelectorAll('input').forEach(input => {
         input.addEventListener('focus', function() {
             this.parentElement.style.transform = 'scale(1.02)';
         });
@@ -417,7 +416,7 @@
 
     // Анимация загрузки
     window.addEventListener('load', () => {
-        document.querySelector('.register-container').style.animation = 'slideInUp 0.8s ease-out';
+        document.querySelector('.login-container').style.animation = 'slideInUp 0.8s ease-out';
     });
 </script>
 </body>

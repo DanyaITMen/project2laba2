@@ -281,6 +281,29 @@
             margin-right: 8px;
         }
 
+        .btn-delete {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+        }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+            background: linear-gradient(135deg, #c0392b, #a93226);
+        }
+
+        .btn-delete:active {
+            transform: translateY(0);
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.5rem;
@@ -304,6 +327,11 @@
             th {
                 font-size: 0.9rem;
             }
+
+            .btn-delete {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -317,6 +345,11 @@
 
             th, td {
                 padding: 8px 5px;
+            }
+
+            .btn-delete {
+                padding: 5px 10px;
+                font-size: 0.7rem;
             }
         }
 
@@ -395,16 +428,23 @@
                 <th>🏠 Домашня команда</th>
                 <th>✈️ Гостьова команда</th>
                 <th>⚽ Рахунок</th>
+                <th>Дії</th>
             </tr>
             </thead>
             <tbody>
             @for (MatchResult match : matches)
                 <tr>
-                    <td class="date-cell">${match.getMatchDate().toString()}</td>
+                    <td class="date-cell">${match.getMatchDate().format(java.time.format.DateTimeFormatter.ofPattern("dd.MM.yyyy"))}</td>
                     <td class="stadium-cell">${match.getStadium()}</td>
                     <td>${match.getHomeTeam().getName()}</td>
                     <td>${match.getAwayTeam().getName()}</td>
                     <td>${match.getHomeScore()} : ${match.getAwayScore()}</td>
+                    <td>
+                        <form method="post" action="/matches/delete" onsubmit="return confirm('Ви впевнені, що хочете видалити цей матч?');">
+                            <input type="hidden" name="id" value="${match.getId()}">
+                            <button class="btn-delete" type="submit">Видалити</button>
+                        </form>
+                    </td>
                 </tr>
             @endfor
             </tbody>
@@ -423,7 +463,6 @@
             this.style.transform = 'scale(1) translateZ(0px)';
         });
     });
-
 </script>
 </body>
 </html>
